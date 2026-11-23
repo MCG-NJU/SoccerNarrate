@@ -34,7 +34,7 @@ The launcher calls `tools/dpo.sh`, which runs `train_dpo.py` on the sample DPO J
 
 ## SoccerNarrate-Eval Inference
 
-See [`streaming_vlm/inference/README.md`](streaming_vlm/inference/README.md) for detailed single-host and multi-host streaming inference instructions.
+See [`streaming_vlm/inference/README.md`](streaming_vlm/inference/README.md) for single-video (`inference.py`) and single-process test-set (`baseline_infer.py`) streaming inference instructions.
 
 ## SoccerNarrate-Eval Metrics
 
@@ -44,7 +44,7 @@ export QWEN_API_URL="http://localhost:8000/v1/chat/completions"
 export QWEN_API_KEY="your_api_key"
 
 python eval/llm_as_a_judge/soccernet_vtt_event_mentions.py \
-  --infer-root streaming-vlm/streaming_vlm/inference/infer_test/streamingvlm_all/test \
+  --infer-root streaming-vlm/streaming_vlm/inference/infer_test/soccernarrate/test \
   --labels-root /path/to/SoccerNet-label \
   --num-workers 64 \
   --out-dir eval/llm_as_a_judge/results

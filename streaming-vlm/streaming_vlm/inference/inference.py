@@ -1,15 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Streaming video description + WebVTT subtitle generation
-Run example:
-    python streaming_inference.py \
-        --model_path Qwen/Qwen2-VL-7B-Instruct \
-        --video_path demo/sources/howto_fix_laptop_mute_1080p.mp4 \
-        --output_dir generated_subtitles.vtt
+Single-video real-time streaming commentary + WebVTT subtitle generation.
+
+Example:
+    python streaming-vlm/streaming_vlm/inference/inference.py \
+        --model_path /path/to/soccernarrate/checkpoint \
+        --video_path demo/Goal.mp4 \
+        --output_dir output/Goal.vtt
 """
 import sys
-sys.path.append("streaming-vlm")
+from pathlib import Path
+
+_THIS_FILE = Path(__file__).resolve()
+for _p in (_THIS_FILE.parents[2], _THIS_FILE.parents[1]):
+    if str(_p) not in sys.path:
+        sys.path.insert(0, str(_p))
 import torch, functools, os, argparse
 from transformers import Qwen2_5_VLForConditionalGeneration, Qwen2VLForConditionalGeneration, Qwen2_5_VLProcessor, Qwen2VLProcessor, AutoProcessor
 from streaming_vlm.inference.streaming_args import StreamingArgs
@@ -283,8 +289,17 @@ def streaming_inference(model_path="",
             )
 
         video_reader.get_frame_timestamp(0) # array([0.0, 0.01668333], dtype=float32)
+        if duration is None or duration <= 0:
+            try:
+                last_ts = video_reader.get_frame_timestamp(len(video_reader) - 1)
+                video_end_s = float(last_ts[1]) if len(last_ts) >= 2 else float(last_ts[0])
+                duration = max(0.0, video_end_s - skip_first_chunk * chunk_duration)
+            except Exception:
+                duration = TOTAL_VIDEO_DURATION
         # video_pts = torch.from_numpy(video_reader._frame_pts[:, 1]) # End timestamp for each frame
         printq(f"resized_height: {resized_height}, resized_width: {resized_width}", quiet=quiet)
+    elif duration is None:
+        duration = TOTAL_VIDEO_DURATION
     ##############################################################################
     # Prepare subtitle file header ##############################################
     if output_dir is not None:
@@ -524,39 +539,41 @@ def streaming_inference(model_path="",
 
 
 if __name__ == "__main__":
-    default_video = "Baidu_NBA_EN/NBA.2015.06.09.Warriors.vs.Cavaliers.720p.HDTV.60fps.x264.mp4"
+    parser = argparse.ArgumentParser(
+        description="Single-video streaming commentary inference for SoccerNarrate."
+    )
+    parser.add_argument("--model_path", type=str, default="mit-han-lab/StreamingVLM")
+    parser.add_argument("--model_base", type=str, choices=["Qwen2_5", "Qwen2"], default="Qwen2_5")
+    parser.add_argument("--video_path", type=str, required=True, help="Path to input video (.mp4 / .mkv)")
+    parser.add_argument("--output_dir", type=str, default=None, help="Output WebVTT file path (e.g., output/Goal.vtt)")
+    parser.add_argument("--query", type=str, default="Commentate on this match.")
+    parser.add_argument("--previous_text", type=str, default="")
+    parser.add_argument("--duration", type=float, default=None, help="Max duration in seconds (default: full video)")
+    parser.add_argument("--window_size", type=int, default=DEFAULT_WINDOW_SIZE)
+    parser.add_argument("--chunk_duration", type=int, default=DEFAULT_CHUNK_DURATION)
+    parser.add_argument("--text_round", type=int, default=DEFAULT_TEXT_ROUND)
+    parser.add_argument("--text_sink", type=int, default=DEFAULT_TEXT_SINK)
+    parser.add_argument("--text_sliding_window", type=int, default=DEFAULT_TEXT_SLIDING_WINDOW)
+    parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
+    parser.add_argument("--repetition_penalty", type=float, default=DEFAULT_REPETITION_PENALTY)
+    parser.add_argument("--pos_mode", type=str, default="shrink", choices=["append", "shrink"])
+    parser.add_argument("--all_text", action="store_true", default=False)
+    parser.add_argument("--skip_first_chunk", type=int, default=0)
+    parser.add_argument("--recompute", action="store_true")
+    parser.add_argument("--quiet", action="store_true")
+    parser.add_argument("--emit_json", action="store_true", help="Emit per-second JSON lines to stdout")
+    parser.add_argument("--test_data_json", type=str, default=None)
+    parser.add_argument("--test_data_idx", type=int, default=None)
+    parser.add_argument("--gt_json", type=str, default=None)
+    parser.add_argument("--gt_idx", type=int, default=0)
 
-    args = argparse.ArgumentParser()
-    args.add_argument("--pos_mode", type=str, default="shrink", choices=["append", "shrink"])
-    args.add_argument("--all_text", action="store_true", default=False)
-    args.add_argument("--model_path", type=str, default="mit-han-lab/StreamingVLM")
-    args.add_argument("--model_base", type=str, choices=["Qwen2_5", "Qwen2", "VILA"], default="Qwen2_5")
-    args.add_argument("--video_path", type=str, default=default_video)
-    args.add_argument("--window_size", type=int, default=DEFAULT_WINDOW_SIZE)
-    args.add_argument("--chunk_duration", type=int, default=DEFAULT_CHUNK_DURATION)
-    args.add_argument("--text_round", type=int, default=DEFAULT_TEXT_ROUND)
-    args.add_argument("--previous_text", type=str, default="THis is a video with title 'Golden State Warriors’ BEST PLAYS from the 2024-25 NBA Season'. This is Highlight of Warriors. Curry is going to score a 3-pointer")
-    args.add_argument("--skip_first_chunk", type=int, default=0)
-    args.add_argument("--recompute", action='store_true')
-    args.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
-    # Both None: no truncation
-    # One None and the other not: treat None as 0 (keep nothing), so both are applied
-    # Both non-None: apply both
-    args.add_argument("--text_sink", type=int, default=DEFAULT_TEXT_SINK)
-    args.add_argument("--text_sliding_window", type=int, default=DEFAULT_TEXT_SLIDING_WINDOW)
-
-    args.add_argument("--output_dir", type=str)
-    args.add_argument("--emit_json", action="store_true", help="Emit per-second JSON lines to stdout")
-
-    args.add_argument("--test_data_json", type=str, default=None)
-    args.add_argument("--test_data_idx", type=int, default=None)
-
-    args.add_argument("--gt_json", type=str, default=None)
-    args.add_argument("--gt_idx", type=int, default=0)
-    
-    args = args.parse_args()
+    args = parser.parse_args()
 
     if args.output_dir is None:
         os.makedirs("output", exist_ok=True)
-        args.output_dir = f"output/{args.model_path.replace('/','_')}_viswin{args.window_size}_txtwin{args.text_round}_prvsink{args.text_sink}_prvwin{args.text_sliding_window}_tprt{args.temperature}.vtt"
-    streaming_inference(**args.__dict__)
+        stem = Path(args.video_path).stem
+        args.output_dir = f"output/{stem}.vtt"
+    else:
+        Path(args.output_dir).parent.mkdir(parents=True, exist_ok=True)
+
+    streaming_inference(**vars(args))

@@ -34,7 +34,7 @@
   <img src="https://img.shields.io/badge/Paper-Coming%20Soon-b31b1b.svg" alt="Paper">
   <a href="https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-SoccerNarrate--Data-yellow.svg" alt="Dataset"></a>
   <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-Coming%20Soon-blue.svg" alt="Model">
-  <a href="streaming-vlm/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
 </p>
 
 </div>
@@ -178,9 +178,28 @@ bash tools/multi_nodes_dpo.sh
 
 ## ⚡ Inference
 
-Streaming full-match inference scripts (single-host multi-GPU and multi-host sharded inference generating per-half `.vtt` commentary files) live under `streaming-vlm/streaming_vlm/inference/`.
+Activate the inference environment (`conda activate streamingvlm-infer`) and run single-process streaming inference:
 
-Please see **[`streaming-vlm/streaming_vlm/inference/README.md`](streaming-vlm/streaming_vlm/inference/README.md)** for detailed setup, arguments, and usage instructions.
+### 1. Single-Video Demo Inference
+
+```bash
+python streaming-vlm/streaming_vlm/inference/inference.py \
+  --model_path /path/to/soccernarrate/checkpoint \
+  --video_path demo/Goal.mp4 \
+  --output_dir output/Goal.vtt
+```
+
+### 2. SoccerNarrate-Eval Test-Set Inference
+
+```bash
+python streaming-vlm/streaming_vlm/inference/baseline_infer.py \
+  --model_path /path/to/soccernarrate/checkpoint \
+  --annos_root /path/to/SoccerNet/asr/annos/test \
+  --video_root /path/to/SoccerNet/videos \
+  --output_root streaming-vlm/streaming_vlm/inference/infer_test/soccernarrate/test
+```
+
+See **[`streaming-vlm/streaming_vlm/inference/README.md`](streaming-vlm/streaming_vlm/inference/README.md)** for full argument details.
 
 ---
 
@@ -204,7 +223,7 @@ Run the evaluator over the generated `.vtt` directory from the repository root:
 
 ```bash
 python eval/llm_as_a_judge/soccernet_vtt_event_mentions.py \
-  --infer-root streaming-vlm/streaming_vlm/inference/infer_test/streamingvlm_all/test \
+  --infer-root streaming-vlm/streaming_vlm/inference/infer_test/soccernarrate/test \
   --labels-root /path/to/SoccerNet-label \
   --window-seconds 30 \
   --stride-seconds 15 \
