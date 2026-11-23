@@ -20,14 +20,13 @@
   Liang Li<sup>2</sup>,
   Junlan Feng<sup>2</sup>,
   <a href="https://mcg.nju.edu.cn/member/gswu/en/index.html">Gangshan Wu</a><sup>1</sup>,
-  <a href="https://scholar.google.com/citations?user=HEuN8PcAAAAJ">Limin Wang</a><sup>1,3</sup>
+  <a href="https://scholar.google.com/citations?user=HEuN8PcAAAAJ">Limin Wang</a><sup>1,†</sup>
 </p>
 
 <p>
-  <sup>1</sup>State Key Laboratory for Novel Software Technology, Nanjing University &nbsp;·&nbsp;
-  <sup>2</sup>JIUTIAN Research &nbsp;·&nbsp;
-  <sup>3</sup>Shanghai AI Laboratory<br>
-  <sup>*</sup>Equal contribution
+  <sup>1</sup>State Key Laboratory for Novel Software Technology, Nanjing University<br>
+  <sup>2</sup>China Mobile Jiutian Artificial Intelligence Technology (Beijing) Co., Ltd.<br>
+  <sup>*</sup>Equal contribution &nbsp;·&nbsp; <sup>†</sup>Corresponding author (<code>lmwang@nju.edu.cn</code>)
 </p>
 
 <p>
