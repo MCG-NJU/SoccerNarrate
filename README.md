@@ -117,6 +117,8 @@ Minimal sample files are provided under `data/` for quick sanity checks:
 
 For full training and evaluation, download the full SFT and DPO annotations from 🤗 **[JiaZihan1/SoccerNarrate-Data](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data)** (`sft/` and `dpo/`), prepare the official SoccerNet match videos (`1_720p.mkv`, `2_720p.mkv`) and SoccerNet event labels (`Labels-v2.json`), and point `DATASET_PATH` to the downloaded files.
 
+For official SoccerNet download/directory layout instructions and the full **SoccerNarrate-Data** & **MWPA/DPO** construction scripts, please see **[`data_pipeline/README.md`](data_pipeline/README.md)**.
+
 ---
 
 ## 🚀 Training
