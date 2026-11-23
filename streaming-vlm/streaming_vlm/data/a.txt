@@ -1,0 +1,10 @@
+<event_candidates>
+{
+  "t": 31.2,
+  "label": "Goal",
+  "conf": 1.0,
+  "team": "home",
+  "player": "home_player_9"
+}
+</event_candidates>
+

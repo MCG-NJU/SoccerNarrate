@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+*.whl
+
+# Logs & temporary files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+.cursorignore
+
+# Model checkpoints & outputs
+checkpoints/
+wandb/
+runs/
+streaming-vlm/checkpoints/
+streaming-vlm/streaming_vlm/inference/infer_test/
+streaming-vlm/streaming_vlm/inference/log/
+eval/llm_as_a_judge/results/

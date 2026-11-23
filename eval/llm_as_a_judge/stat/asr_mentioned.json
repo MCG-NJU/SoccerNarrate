@@ -1,0 +1,692 @@
+{
+  "config": {
+    "asr_root": "/path/to/SoccerNet/asr/annos",
+    "label_root": "/path/to/SoccerNet/SoccerNet-label/raw_annos",
+    "splits": [
+      "train",
+      "valid",
+      "test"
+    ],
+    "asr_glob": [
+      "*processed_clean.json",
+      "*processed.json"
+    ],
+    "window_seconds": [
+      20,
+      30,
+      40,
+      50,
+      60,
+      70
+    ],
+    "pre_event_seconds": 5.0,
+    "asr_text_field": "llm_polished_text",
+    "only_llm_keep": true,
+    "visible_only": true,
+    "api_url": "http://localhost:8000/v1/chat/completions",
+    "model": "Qwen3-235B-A22B-Instruct-2507",
+    "dry_run": false,
+    "num_workers": 64,
+    "request_timeout_s": 60.0,
+    "max_retries": 3
+  },
+  "primary_window_seconds": 70,
+  "overall": {
+    "total": 79307,
+    "happened": 29279,
+    "happened_rate": 0.3691855700001261
+  },
+  "per_label": {
+    "Ball out of play": {
+      "total": 26527,
+      "happened": 7201,
+      "happened_rate": 0.2714592679157085
+    },
+    "Clearance": {
+      "total": 3161,
+      "happened": 428,
+      "happened_rate": 0.1354001898133502
+    },
+    "Corner": {
+      "total": 3690,
+      "happened": 1626,
+      "happened_rate": 0.44065040650406506
+    },
+    "Direct free-kick": {
+      "total": 1561,
+      "happened": 448,
+      "happened_rate": 0.28699551569506726
+    },
+    "Foul": {
+      "total": 9985,
+      "happened": 5825,
+      "happened_rate": 0.5833750625938908
+    },
+    "Goal": {
+      "total": 1478,
+      "happened": 1421,
+      "happened_rate": 0.9614343707713126
+    },
+    "Indirect free-kick": {
+      "total": 5143,
+      "happened": 946,
+      "happened_rate": 0.1839393350184717
+    },
+    "Kick-off": {
+      "total": 633,
+      "happened": 145,
+      "happened_rate": 0.22906793048973143
+    },
+    "Offside": {
+      "total": 1716,
+      "happened": 886,
+      "happened_rate": 0.5163170163170163
+    },
+    "Penalty": {
+      "total": 143,
+      "happened": 101,
+      "happened_rate": 0.7062937062937062
+    },
+    "Red card": {
+      "total": 49,
+      "happened": 45,
+      "happened_rate": 0.9183673469387755
+    },
+    "Shots off target": {
+      "total": 4586,
+      "happened": 2931,
+      "happened_rate": 0.6391190580026167
+    },
+    "Shots on target": {
+      "total": 5092,
+      "happened": 3352,
+      "happened_rate": 0.6582875098193244
+    },
+    "Substitution": {
+      "total": 2044,
+      "happened": 1358,
+      "happened_rate": 0.6643835616438356
+    },
+    "Throw-in": {
+      "total": 11826,
+      "happened": 1304,
+      "happened_rate": 0.11026551665821072
+    },
+    "Yellow card": {
+      "total": 1636,
+      "happened": 1232,
+      "happened_rate": 0.7530562347188264
+    },
+    "Yellow->red card": {
+      "total": 37,
+      "happened": 30,
+      "happened_rate": 0.8108108108108109
+    }
+  },
+  "per_window_seconds": {
+    "20": {
+      "overall": {
+        "total": 73911,
+        "happened": 23011,
+        "happened_rate": 0.31133390158433794
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 24735,
+          "happened": 5259,
+          "happened_rate": 0.2126137052759248
+        },
+        "Clearance": {
+          "total": 2866,
+          "happened": 108,
+          "happened_rate": 0.03768318213538032
+        },
+        "Corner": {
+          "total": 3505,
+          "happened": 1586,
+          "happened_rate": 0.45249643366619113
+        },
+        "Direct free-kick": {
+          "total": 1504,
+          "happened": 479,
+          "happened_rate": 0.3184840425531915
+        },
+        "Foul": {
+          "total": 9336,
+          "happened": 4440,
+          "happened_rate": 0.4755784061696658
+        },
+        "Goal": {
+          "total": 1444,
+          "happened": 1219,
+          "happened_rate": 0.8441828254847645
+        },
+        "Indirect free-kick": {
+          "total": 4597,
+          "happened": 632,
+          "happened_rate": 0.13748096584729172
+        },
+        "Kick-off": {
+          "total": 567,
+          "happened": 108,
+          "happened_rate": 0.19047619047619047
+        },
+        "Offside": {
+          "total": 1621,
+          "happened": 830,
+          "happened_rate": 0.5120296113510179
+        },
+        "Penalty": {
+          "total": 140,
+          "happened": 63,
+          "happened_rate": 0.45
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 37,
+          "happened_rate": 0.7551020408163265
+        },
+        "Shots off target": {
+          "total": 4479,
+          "happened": 2316,
+          "happened_rate": 0.5170797052913597
+        },
+        "Shots on target": {
+          "total": 4949,
+          "happened": 2814,
+          "happened_rate": 0.5685997171145686
+        },
+        "Substitution": {
+          "total": 1940,
+          "happened": 1123,
+          "happened_rate": 0.5788659793814434
+        },
+        "Throw-in": {
+          "total": 10564,
+          "happened": 891,
+          "happened_rate": 0.08434305187429005
+        },
+        "Yellow card": {
+          "total": 1578,
+          "happened": 1084,
+          "happened_rate": 0.6869455006337135
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 22,
+          "happened_rate": 0.5945945945945946
+        }
+      }
+    },
+    "30": {
+      "overall": {
+        "total": 76582,
+        "happened": 25615,
+        "happened_rate": 0.33447807578804417
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 25605,
+          "happened": 5888,
+          "happened_rate": 0.2299550868970904
+        },
+        "Clearance": {
+          "total": 3017,
+          "happened": 206,
+          "happened_rate": 0.06827974809413324
+        },
+        "Corner": {
+          "total": 3593,
+          "happened": 1635,
+          "happened_rate": 0.45505148900640136
+        },
+        "Direct free-kick": {
+          "total": 1545,
+          "happened": 491,
+          "happened_rate": 0.31779935275080906
+        },
+        "Foul": {
+          "total": 9641,
+          "happened": 5016,
+          "happened_rate": 0.5202779794627114
+        },
+        "Goal": {
+          "total": 1465,
+          "happened": 1311,
+          "happened_rate": 0.8948805460750853
+        },
+        "Indirect free-kick": {
+          "total": 4860,
+          "happened": 733,
+          "happened_rate": 0.1508230452674897
+        },
+        "Kick-off": {
+          "total": 601,
+          "happened": 126,
+          "happened_rate": 0.2096505823627288
+        },
+        "Offside": {
+          "total": 1657,
+          "happened": 899,
+          "happened_rate": 0.5425467712733857
+        },
+        "Penalty": {
+          "total": 142,
+          "happened": 77,
+          "happened_rate": 0.5422535211267606
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 41,
+          "happened_rate": 0.8367346938775511
+        },
+        "Shots off target": {
+          "total": 4545,
+          "happened": 2647,
+          "happened_rate": 0.5823982398239824
+        },
+        "Shots on target": {
+          "total": 5033,
+          "happened": 3058,
+          "happened_rate": 0.6075899066163322
+        },
+        "Substitution": {
+          "total": 1989,
+          "happened": 1244,
+          "happened_rate": 0.6254399195575666
+        },
+        "Throw-in": {
+          "total": 11194,
+          "happened": 1039,
+          "happened_rate": 0.09281758084688226
+        },
+        "Yellow card": {
+          "total": 1609,
+          "happened": 1178,
+          "happened_rate": 0.7321317588564326
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 26,
+          "happened_rate": 0.7027027027027027
+        }
+      }
+    },
+    "40": {
+      "overall": {
+        "total": 77957,
+        "happened": 27081,
+        "happened_rate": 0.3473838141539567
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 26056,
+          "happened": 6398,
+          "happened_rate": 0.24554805035308566
+        },
+        "Clearance": {
+          "total": 3088,
+          "happened": 274,
+          "happened_rate": 0.08873056994818652
+        },
+        "Corner": {
+          "total": 3641,
+          "happened": 1639,
+          "happened_rate": 0.4501510574018127
+        },
+        "Direct free-kick": {
+          "total": 1557,
+          "happened": 486,
+          "happened_rate": 0.31213872832369943
+        },
+        "Foul": {
+          "total": 9801,
+          "happened": 5297,
+          "happened_rate": 0.5404550556065708
+        },
+        "Goal": {
+          "total": 1478,
+          "happened": 1346,
+          "happened_rate": 0.9106901217861976
+        },
+        "Indirect free-kick": {
+          "total": 5006,
+          "happened": 832,
+          "happened_rate": 0.16620055932880543
+        },
+        "Kick-off": {
+          "total": 624,
+          "happened": 132,
+          "happened_rate": 0.21153846153846154
+        },
+        "Offside": {
+          "total": 1692,
+          "happened": 907,
+          "happened_rate": 0.5360520094562647
+        },
+        "Penalty": {
+          "total": 141,
+          "happened": 83,
+          "happened_rate": 0.5886524822695035
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 44,
+          "happened_rate": 0.8979591836734694
+        },
+        "Shots off target": {
+          "total": 4562,
+          "happened": 2779,
+          "happened_rate": 0.6091626479614204
+        },
+        "Shots on target": {
+          "total": 5066,
+          "happened": 3178,
+          "happened_rate": 0.6273193841294907
+        },
+        "Substitution": {
+          "total": 2014,
+          "happened": 1302,
+          "happened_rate": 0.6464746772591857
+        },
+        "Throw-in": {
+          "total": 11522,
+          "happened": 1143,
+          "happened_rate": 0.09920152751258463
+        },
+        "Yellow card": {
+          "total": 1623,
+          "happened": 1212,
+          "happened_rate": 0.7467652495378928
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 29,
+          "happened_rate": 0.7837837837837838
+        }
+      }
+    },
+    "50": {
+      "overall": {
+        "total": 78691,
+        "happened": 28025,
+        "happened_rate": 0.3561398381009264
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 26326,
+          "happened": 6727,
+          "happened_rate": 0.25552685558003496
+        },
+        "Clearance": {
+          "total": 3129,
+          "happened": 318,
+          "happened_rate": 0.10162991371045062
+        },
+        "Corner": {
+          "total": 3662,
+          "happened": 1654,
+          "happened_rate": 0.4516657564172583
+        },
+        "Direct free-kick": {
+          "total": 1559,
+          "happened": 469,
+          "happened_rate": 0.3008338678640154
+        },
+        "Foul": {
+          "total": 9891,
+          "happened": 5517,
+          "happened_rate": 0.5577797998180164
+        },
+        "Goal": {
+          "total": 1477,
+          "happened": 1380,
+          "happened_rate": 0.9343263371699391
+        },
+        "Indirect free-kick": {
+          "total": 5072,
+          "happened": 883,
+          "happened_rate": 0.17409305993690852
+        },
+        "Kick-off": {
+          "total": 627,
+          "happened": 134,
+          "happened_rate": 0.21371610845295055
+        },
+        "Offside": {
+          "total": 1705,
+          "happened": 903,
+          "happened_rate": 0.5296187683284458
+        },
+        "Penalty": {
+          "total": 142,
+          "happened": 96,
+          "happened_rate": 0.676056338028169
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 44,
+          "happened_rate": 0.8979591836734694
+        },
+        "Shots off target": {
+          "total": 4573,
+          "happened": 2826,
+          "happened_rate": 0.6179750710693199
+        },
+        "Shots on target": {
+          "total": 5084,
+          "happened": 3270,
+          "happened_rate": 0.6431943351691581
+        },
+        "Substitution": {
+          "total": 2029,
+          "happened": 1324,
+          "happened_rate": 0.6525381961557417
+        },
+        "Throw-in": {
+          "total": 11699,
+          "happened": 1227,
+          "happened_rate": 0.10488075903923412
+        },
+        "Yellow card": {
+          "total": 1630,
+          "happened": 1225,
+          "happened_rate": 0.7515337423312883
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 28,
+          "happened_rate": 0.7567567567567568
+        }
+      }
+    },
+    "60": {
+      "overall": {
+        "total": 79087,
+        "happened": 28670,
+        "happened_rate": 0.36251217014174264
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 26459,
+          "happened": 6978,
+          "happened_rate": 0.263728787936052
+        },
+        "Clearance": {
+          "total": 3150,
+          "happened": 357,
+          "happened_rate": 0.11333333333333333
+        },
+        "Corner": {
+          "total": 3675,
+          "happened": 1647,
+          "happened_rate": 0.44816326530612244
+        },
+        "Direct free-kick": {
+          "total": 1560,
+          "happened": 463,
+          "happened_rate": 0.2967948717948718
+        },
+        "Foul": {
+          "total": 9955,
+          "happened": 5631,
+          "happened_rate": 0.5656454043194374
+        },
+        "Goal": {
+          "total": 1478,
+          "happened": 1403,
+          "happened_rate": 0.949255751014885
+        },
+        "Indirect free-kick": {
+          "total": 5117,
+          "happened": 932,
+          "happened_rate": 0.18213797146765684
+        },
+        "Kick-off": {
+          "total": 631,
+          "happened": 147,
+          "happened_rate": 0.2329635499207607
+        },
+        "Offside": {
+          "total": 1710,
+          "happened": 904,
+          "happened_rate": 0.5286549707602339
+        },
+        "Penalty": {
+          "total": 142,
+          "happened": 101,
+          "happened_rate": 0.7112676056338029
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 45,
+          "happened_rate": 0.9183673469387755
+        },
+        "Shots off target": {
+          "total": 4586,
+          "happened": 2870,
+          "happened_rate": 0.6258177060619277
+        },
+        "Shots on target": {
+          "total": 5090,
+          "happened": 3303,
+          "happened_rate": 0.6489194499017682
+        },
+        "Substitution": {
+          "total": 2040,
+          "happened": 1354,
+          "happened_rate": 0.6637254901960784
+        },
+        "Throw-in": {
+          "total": 11772,
+          "happened": 1272,
+          "happened_rate": 0.10805300713557595
+        },
+        "Yellow card": {
+          "total": 1636,
+          "happened": 1233,
+          "happened_rate": 0.7536674816625917
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 30,
+          "happened_rate": 0.8108108108108109
+        }
+      }
+    },
+    "70": {
+      "overall": {
+        "total": 79307,
+        "happened": 29279,
+        "happened_rate": 0.3691855700001261
+      },
+      "per_label": {
+        "Ball out of play": {
+          "total": 26527,
+          "happened": 7201,
+          "happened_rate": 0.2714592679157085
+        },
+        "Clearance": {
+          "total": 3161,
+          "happened": 428,
+          "happened_rate": 0.1354001898133502
+        },
+        "Corner": {
+          "total": 3690,
+          "happened": 1626,
+          "happened_rate": 0.44065040650406506
+        },
+        "Direct free-kick": {
+          "total": 1561,
+          "happened": 448,
+          "happened_rate": 0.28699551569506726
+        },
+        "Foul": {
+          "total": 9985,
+          "happened": 5825,
+          "happened_rate": 0.5833750625938908
+        },
+        "Goal": {
+          "total": 1478,
+          "happened": 1421,
+          "happened_rate": 0.9614343707713126
+        },
+        "Indirect free-kick": {
+          "total": 5143,
+          "happened": 946,
+          "happened_rate": 0.1839393350184717
+        },
+        "Kick-off": {
+          "total": 633,
+          "happened": 145,
+          "happened_rate": 0.22906793048973143
+        },
+        "Offside": {
+          "total": 1716,
+          "happened": 886,
+          "happened_rate": 0.5163170163170163
+        },
+        "Penalty": {
+          "total": 143,
+          "happened": 101,
+          "happened_rate": 0.7062937062937062
+        },
+        "Red card": {
+          "total": 49,
+          "happened": 45,
+          "happened_rate": 0.9183673469387755
+        },
+        "Shots off target": {
+          "total": 4586,
+          "happened": 2931,
+          "happened_rate": 0.6391190580026167
+        },
+        "Shots on target": {
+          "total": 5092,
+          "happened": 3352,
+          "happened_rate": 0.6582875098193244
+        },
+        "Substitution": {
+          "total": 2044,
+          "happened": 1358,
+          "happened_rate": 0.6643835616438356
+        },
+        "Throw-in": {
+          "total": 11826,
+          "happened": 1304,
+          "happened_rate": 0.11026551665821072
+        },
+        "Yellow card": {
+          "total": 1636,
+          "happened": 1232,
+          "happened_rate": 0.7530562347188264
+        },
+        "Yellow->red card": {
+          "total": 37,
+          "happened": 30,
+          "happened_rate": 0.8108108108108109
+        }
+      }
+    }
+  }
+}
