@@ -31,8 +31,9 @@
 
 <p>
   <img src="https://img.shields.io/badge/Paper-Coming%20Soon-b31b1b.svg" alt="Paper">
+  <a href="https://huggingface.co/collections/MCG-NJU/soccernarrate-6b03e5ec4b39ad06088131d2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Collection-SoccerNarrate-orange.svg" alt="Collection"></a>
+  <a href="https://huggingface.co/JiaZihan1/SoccerNarrate-7B"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-SoccerNarrate--7B-blue.svg" alt="Model"></a>
   <a href="https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-SoccerNarrate--Data-yellow.svg" alt="Dataset"></a>
-  <img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-Coming%20Soon-blue.svg" alt="Model">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
 </p>
 
@@ -176,6 +177,8 @@ bash tools/multi_nodes_dpo.sh
 ---
 
 ## ⚡ Inference
+
+Model checkpoints are hosted on Hugging Face ([**SoccerNarrate-7B**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) for the full SFT+MWPA model and [**SoccerNarrate-7B-SFT**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) for the Stage 1+2 SFT checkpoint; see the [**MCG-NJU Collection**](https://huggingface.co/collections/MCG-NJU/soccernarrate-6b03e5ec4b39ad06088131d2)).
 
 Activate the inference environment (`conda activate streamingvlm-infer`) and run single-process streaming inference:
 
