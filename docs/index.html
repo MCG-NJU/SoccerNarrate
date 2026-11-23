@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SoccerNarrate — Event-Grounded Streaming Soccer Commentary</title>
+  <meta name="description" content="SoccerNarrate: Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment (NeurIPS 2026)." />
+  <meta property="og:title" content="SoccerNarrate — Event-Grounded Streaming Soccer Commentary" />
+  <meta property="og:description" content="Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment (NeurIPS 2026)." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/svg+xml" href="./assets/brands/soccernarrate.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a class="brand" href="#top">
+        <img src="./assets/brands/soccernarrate.svg" alt="" />
+        <span>SoccerNarrate</span>
+      </a>
+      <div class="nav-links">
+        <a href="#demos">Demos</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#citation">BibTeX</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="hero-copy">
+        <div class="venue-pill">NeurIPS 2026</div>
+        <h1>SoccerNarrate</h1>
+        <p class="hero-subtitle">
+          Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment.
+        </p>
+
+        <div class="authors" aria-label="Authors">
+          <a href="https://scholar.google.com/citations?user=40v8918AAAAJ" target="_blank" rel="noreferrer">Zihan Jia</a><sup>1*</sup>,
+          Zhilin Dai<sup>1*</sup>,
+          Zhengming Zhang<sup>2*</sup>,
+          <a href="https://scholar.google.com/citations?user=tjERXFgAAAAJ" target="_blank" rel="noreferrer">Min Yang</a><sup>1</sup>,
+          <a href="https://scholar.google.com/citations?user=980TzfUAAAAJ" target="_blank" rel="noreferrer">Zhenpeng Huang</a><sup>1</sup>,
+          Jiaqi Li<sup>2</sup>,
+          Caixia Sun<sup>2</sup>,
+          Xi Chen<sup>2</sup>,
+          Liang Li<sup>2</sup>,
+          Junlan Feng<sup>2</sup>,
+          <a href="https://mcg.nju.edu.cn/member/gswu/en/index.html" target="_blank" rel="noreferrer">Gangshan Wu</a><sup>1</sup>,
+          <a href="https://scholar.google.com/citations?user=HEuN8PcAAAAJ" target="_blank" rel="noreferrer">Limin Wang</a><sup>1†</sup>
+
+          <div class="affil-lines">
+            <div><sup>1</sup> State Key Laboratory for Novel Software Technology, Nanjing University</div>
+            <div><sup>2</sup> China Mobile Jiutian Artificial Intelligence Technology (Beijing) Co., Ltd.</div>
+            <div class="affil-note"><sup>*</sup> Equal contribution &nbsp;·&nbsp; <sup>†</sup> Corresponding author (lmwang@nju.edu.cn)</div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <!-- TODO: Replace href with arXiv link once posted -->
+          <a class="btn" href="#citation">
+            <img class="btn-arxiv" src="https://arxiv.org/static/base/1.0.1/images/arxiv-logo-primary-light.svg" alt="" aria-hidden="true" />
+            <span>Paper</span>
+            <span class="tag-soon">Soon</span>
+          </a>
+          <a class="btn btn-primary" href="https://github.com/MCG-NJU/SoccerNarrate" target="_blank" rel="noreferrer">
+            <img class="btn-icon" src="./assets/brands/github.svg" alt="" aria-hidden="true" />
+            <span>Code</span>
+          </a>
+          <a class="btn" href="https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data" target="_blank" rel="noreferrer">
+            <img class="btn-hf" src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="" aria-hidden="true" />
+            <span>Dataset</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Animated Paper Figure 1 (Real SoccerNet Video + Synchronized Per-Second Commentary) -->
+      <div class="fig1-player" id="fig1-player" aria-label="Figure 1 real-time streaming commentary video">
+        <div class="fig1-topbar">
+          <div class="live-indicator">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>Fig. 1 · Live Stream (2 FPS)</span>
+          </div>
+          <div class="fig1-controls">
+            <span class="score-pill" id="fig1-score">MC 1–0 CHE</span>
+            <span class="clock-pill" id="fig1-clock">78:41</span>
+          </div>
+        </div>
+
+        <div class="fig1-stage" id="fig1-stage" title="Click video to pause or resume">
+          <video id="fig1-video" autoplay muted loop playsinline preload="auto" poster="./assets/hero/fig1_poster.jpg">
+            <source src="./assets/hero/fig1_clip.mp4" type="video/mp4" />
+          </video>
+          <div class="event-badge is-visible" id="fig1-event">GT Event · Corner kick @ 78:41</div>
+          <div class="stage-caption">
+            <span class="stage-time" id="fig1-cap-time">78:41</span>
+            <span class="stage-text" id="fig1-cap-text"><span class="cap-new">Corner kick now</span></span>
+          </div>
+        </div>
+
+        <div class="fig1-progress" aria-hidden="true">
+          <div class="fig1-progress-fill" id="fig1-progress-fill"></div>
+        </div>
+
+        <div class="fig1-transcript">
+          <div class="transcript-label">
+            <span>Per-second streaming output (&lt;0.3s latency)</span>
+            <span>Click any second to seek</span>
+          </div>
+          <div class="transcript-stream" id="fig1-transcript">
+            <button type="button" class="seg-chip is-active" data-step="0"><span class="seg-t">78:41</span><span class="seg-w">Corner kick now ...</span></button>
+            <button type="button" class="seg-chip" data-step="1"><span class="seg-t">78:42</span><span class="seg-w">Kompany ...</span></button>
+            <button type="button" class="seg-chip" data-step="2"><span class="seg-t">78:43</span><span class="seg-w">That's a ...</span></button>
+            <button type="button" class="seg-chip" data-step="3"><span class="seg-t">78:44</span><span class="seg-w">good effort ...</span></button>
+            <button type="button" class="seg-chip" data-step="4"><span class="seg-t">78:45</span><span class="seg-w">by Kompany ...</span></button>
+            <button type="button" class="seg-chip" data-step="5"><span class="seg-t">78:46</span><span class="seg-w">and ...</span></button>
+            <button type="button" class="seg-chip" data-step="6"><span class="seg-t">78:47</span><span class="seg-w">Manchester City ...</span></button>
+            <button type="button" class="seg-chip" data-step="7"><span class="seg-t">78:48</span><span class="seg-w">2-0 up. ...</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Demos -->
+    <section class="section section-tinted" id="demos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Live Commentary Demos</h2>
+          <p>Causal 2 FPS streaming outputs (&lt;0.3s per response on 1× H100) across key soccer events.</p>
+        </div>
+        <div class="demo-grid">
+          <figure class="demo-item">
+            <div class="demo-video">
+              <video controls preload="metadata" playsinline poster="./assets/posters/Goal.jpg">
+                <source src="./demo/Goal.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>Goal</b><span>00:17 · 2 FPS</span></figcaption>
+          </figure>
+          <figure class="demo-item">
+            <div class="demo-video">
+              <video controls preload="metadata" playsinline poster="./assets/posters/yellow_card.jpg">
+                <source src="./demo/yellow_card.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>Yellow Card</b><span>00:26 · 2 FPS</span></figcaption>
+          </figure>
+          <figure class="demo-item">
+            <div class="demo-video">
+              <video controls preload="metadata" playsinline poster="./assets/posters/substitution.jpg">
+                <source src="./demo/substitution.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>Substitution</b><span>00:15 · 2 FPS</span></figcaption>
+          </figure>
+          <figure class="demo-item">
+            <div class="demo-video">
+              <video controls preload="metadata" playsinline poster="./assets/posters/shot_off_target.jpg">
+                <source src="./demo/shot_off_target.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <figcaption><b>Shot Off Target</b><span>00:19 · 2 FPS</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method -->
+    <section class="section" id="method">
+      <div class="container">
+        <div class="section-head">
+          <h2>Method</h2>
+          <p>Align multi-second event semantics via Macro-Window Preference Alignment while preserving 1-second causal decoding.</p>
+        </div>
+
+        <div class="tab-bar" role="tablist" aria-label="Method overview tabs">
+          <button class="tab-btn is-active" type="button" role="tab" aria-selected="true" data-tab="mwpa">Macro-Window Preference Alignment</button>
+          <button class="tab-btn" type="button" role="tab" aria-selected="false" data-tab="data">SoccerNarrate-Data Pipeline</button>
+        </div>
+
+        <div class="method-panel is-active" id="panel-mwpa" role="tabpanel">
+          <img src="./assets/paper/mws-dpo.png" alt="Macro-Window Preference Alignment (MWPA) overview" />
+          <p>
+            <strong>MWPA:</strong> Starting from the same streaming prefix state, we apply DPO over 15-second causal rollouts, contrasting ground-truth event narration against same-match event-mismatched counterfactual negatives—injecting event-level feedback without altering 1-second streaming inference.
+          </p>
+        </div>
+
+        <div class="method-panel" id="panel-data" role="tabpanel">
+          <img src="./assets/paper/pipeline_and_example.png" alt="SoccerNarrate-Data curation pipeline" />
+          <p>
+            <strong>SoccerNarrate-Data (436 matches · 502h curated ASR):</strong> Built with WhisperX word-level timestamps, speaker diarization, Qwen3-235B quality gating, and phoneme-based roster calibration, reducing player/team name errors from 28.4% to 0.1%.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="section section-tinted" id="results">
+      <div class="container">
+        <div class="section-head">
+          <h2>Results</h2>
+          <p>Evaluated on 45 full matches (14 key event classes, δ = 15s) in SoccerNarrate-Eval and 45-minute half latency tests.</p>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi">
+            <div class="kpi-label">Overall F1</div>
+            <strong>54.4%</strong>
+            <span>+19.1 over StreamingVLM (FT)</span>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Class-Average F1</div>
+            <strong>46.9%</strong>
+            <span>+16.9 over StreamingVLM (FT)</span>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Streaming Latency</div>
+            <strong>&lt;0.3s</strong>
+            <span>~0.05s/token flat · 2 FPS on H100</span>
+          </div>
+        </div>
+
+        <div class="results-layout">
+          <div class="card">
+            <div class="card-head">
+              <h3>SoccerNarrate-Eval (Table 2)</h3>
+              <span>Recall / Precision / F1 (%)</span>
+            </div>
+            <div class="table-scroll">
+              <table class="results-table" id="results-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Mode</th>
+                    <th>Class F1</th>
+                    <th>Overall F1</th>
+                    <th>Class R</th>
+                    <th>Overall P</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="extra-row"><td>Video-LLaVA (7B)</td><td>Offline</td><td>4.0</td><td>9.4</td><td>14.5</td><td>8.1</td></tr>
+                  <tr class="extra-row"><td>Qwen2.5-VL (7B)</td><td>Offline</td><td>22.6</td><td>23.4</td><td>32.6</td><td>31.1</td></tr>
+                  <tr class="extra-row"><td>Qwen3-VL (8B)</td><td>Offline</td><td>19.8</td><td>25.8</td><td>19.5</td><td>38.8</td></tr>
+                  <tr><td>Qwen3.5 (9B)</td><td>Offline</td><td>23.8</td><td>37.3</td><td>42.6</td><td>28.8</td></tr>
+                  <tr class="extra-row"><td>MatchTime (8B)</td><td>Offline Soccer</td><td>9.6</td><td>22.7</td><td>11.8</td><td>23.7</td></tr>
+                  <tr><td>UniSoccer (8B)</td><td>Offline Soccer</td><td>29.4</td><td>32.0</td><td>50.4</td><td>23.5</td></tr>
+                  <tr><td>SoccerChat (7B)</td><td>Offline Soccer</td><td>32.9</td><td>45.6</td><td>51.1</td><td>35.6</td></tr>
+                  <tr class="extra-row"><td>TimeSoccer (7B)</td><td>Offline Soccer</td><td>24.5</td><td>30.4</td><td>41.5</td><td>23.6</td></tr>
+                  <tr class="extra-row"><td>VideoChat-Online (4B)</td><td>Streaming</td><td>3.0</td><td>2.8</td><td>3.2</td><td>9.4</td></tr>
+                  <tr class="extra-row"><td>LiveCC (7B)</td><td>Streaming</td><td>2.7</td><td>3.7</td><td>2.6</td><td>7.9</td></tr>
+                  <tr class="extra-row"><td>LiveStar (8B)</td><td>Streaming</td><td>11.9</td><td>16.4</td><td>17.5</td><td>24.2</td></tr>
+                  <tr><td>LiveCC (FT, 7B)</td><td>Streaming Soccer</td><td>9.7</td><td>10.7</td><td>8.2</td><td>34.0</td></tr>
+                  <tr><td>StreamingVLM (7B)</td><td>Streaming Soccer</td><td>28.5</td><td>34.2</td><td>33.2</td><td>40.9</td></tr>
+                  <tr><td>StreamingVLM (FT, 7B)</td><td>Streaming Soccer</td><td>30.0</td><td>35.3</td><td>34.6</td><td>42.3</td></tr>
+                  <tr class="ours-row"><td>SoccerNarrate (7B)</td><td>Streaming Soccer</td><td>46.9</td><td>54.4</td><td>71.8</td><td>48.8</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-foot">
+              <span>(FT) = fine-tuned on SoccerNarrate-SFT</span>
+              <button class="text-btn" type="button" id="toggle-table">Show all 15 models ↓</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>45-Min Streaming Latency</h3>
+              <span>1× NVIDIA H100</span>
+            </div>
+            <div class="latency-body">
+              <img src="./assets/paper/latency.png" alt="Per-token latency across a 45-minute half" />
+              <p>
+                Bounded KV-cache reuse keeps per-token latency flat (~0.05 s/tok) below the 0.1 s/tok (10 tok/s) real-time threshold without periodic spikes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Citation -->
+    <section class="section" id="citation">
+      <div class="container">
+        <div class="section-head">
+          <h2>Citation</h2>
+          <p>If SoccerNarrate is helpful for your research, please cite our NeurIPS 2026 paper.</p>
+        </div>
+        <div class="bibtex-card">
+          <div class="bibtex-head">
+            <span>BibTeX</span>
+            <button class="copy-btn" type="button" id="copy-bibtex">Copy</button>
+          </div>
+          <pre><code id="bibtex-code">@inproceedings{jia2026soccernarrate,
+  title     = {SoccerNarrate: Event-Grounded Streaming Soccer Commentary
+               with Macro-Window Preference Alignment},
+  author    = {Jia, Zihan and Dai, Zhilin and Zhang, Zhengming and Yang, Min and
+               Huang, Zhenpeng and Li, Jiaqi and Sun, Caixia and Chen, Xi and
+               Li, Liang and Feng, Junlan and Wu, Gangshan and Wang, Limin},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  year      = {2026}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <span>SoccerNarrate · MCG-NJU</span>
+    <div class="footer-links">
+      <a href="https://github.com/MCG-NJU/SoccerNarrate" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data" target="_blank" rel="noreferrer">Dataset</a>
+      <a href="#top">Top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    // 1. Synchronized Paper Figure 1 Video (78:41 -> 78:48, exact 8.0s SoccerNet clip)
+    const FIG1_STEPS = [
+      { time: "78:41", chunk: "Corner kick now,",  score: "MC 1–0 CHE", badge: "GT Event · Corner kick @ 78:41", isGoal: false },
+      { time: "78:42", chunk: "Kompany.",          score: "MC 1–0 CHE", badge: "", isGoal: false },
+      { time: "78:43", chunk: "That's a",          score: "MC 1–0 CHE", badge: "GT Event · Goal @ 78:43", isGoal: true },
+      { time: "78:44", chunk: "good effort",       score: "MC 1–0 CHE", badge: "", isGoal: false },
+      { time: "78:45", chunk: "by Kompany",        score: "MC 1–0 CHE", badge: "", isGoal: false },
+      { time: "78:46", chunk: "and",               score: "MC 1–0 CHE", badge: "", isGoal: false },
+      { time: "78:47", chunk: "Manchester City",   score: "MC 2–0 CHE", badge: "", isGoal: false },
+      { time: "78:48", chunk: "2-0 up.",           score: "MC 2–0 CHE", badge: "Score · MC 2–0 CHE", isGoal: false },
+    ];
+
+    const playerEl = document.getElementById("fig1-player");
+    const videoEl = document.getElementById("fig1-video");
+    const stageEl = document.getElementById("fig1-stage");
+    const clockEl = document.getElementById("fig1-clock");
+    const scoreEl = document.getElementById("fig1-score");
+    const eventEl = document.getElementById("fig1-event");
+    const capTimeEl = document.getElementById("fig1-cap-time");
+    const capTextEl = document.getElementById("fig1-cap-text");
+    const progressFill = document.getElementById("fig1-progress-fill");
+    const segChips = Array.from(document.querySelectorAll("#fig1-transcript .seg-chip"));
+
+    let lastStep = -1;
+
+    function renderStep(idx) {
+      if (idx === lastStep) return;
+      lastStep = idx;
+      const s = FIG1_STEPS[idx];
+      clockEl.textContent = s.time;
+      scoreEl.textContent = s.score;
+      scoreEl.classList.toggle("is-updated", idx >= 6);
+      capTimeEl.textContent = s.time;
+
+      // Cumulative coherent commentary inside the video frame, highlighting the newly appended increment
+      const prevText = FIG1_STEPS.slice(0, idx).map((x) => x.chunk).join(" ");
+      capTextEl.innerHTML = prevText
+        ? `${prevText} <span class="cap-new">${s.chunk}</span>`
+        : `<span class="cap-new">${s.chunk}</span>`;
+
+      if (s.badge) {
+        eventEl.textContent = s.badge;
+        eventEl.classList.add("is-visible");
+        eventEl.classList.toggle("is-goal", s.isGoal);
+      } else {
+        eventEl.classList.remove("is-visible", "is-goal");
+      }
+
+      segChips.forEach((el, i) => {
+        el.classList.toggle("is-active", i === idx);
+        el.classList.toggle("is-past", i < idx);
+      });
+    }
+
+    function syncVideo() {
+      const t = videoEl.currentTime || 0;
+      const dur = videoEl.duration && Number.isFinite(videoEl.duration) ? videoEl.duration : 8.0;
+      const idx = Math.max(0, Math.min(FIG1_STEPS.length - 1, Math.floor(t)));
+      renderStep(idx);
+      progressFill.style.width = `${Math.min(100, (t / dur) * 100)}%`;
+      requestAnimationFrame(syncVideo);
+    }
+
+    videoEl.addEventListener("timeupdate", () => {
+      const t = videoEl.currentTime || 0;
+      const dur = videoEl.duration && Number.isFinite(videoEl.duration) ? videoEl.duration : 8.0;
+      const idx = Math.max(0, Math.min(FIG1_STEPS.length - 1, Math.floor(t)));
+      renderStep(idx);
+      progressFill.style.width = `${Math.min(100, (t / dur) * 100)}%`;
+    });
+
+    renderStep(0);
+    videoEl.play().catch(() => {});
+    requestAnimationFrame(syncVideo);
+
+    stageEl.addEventListener("click", () => {
+      if (videoEl.paused) {
+        videoEl.play().catch(() => {});
+        playerEl.classList.remove("is-paused");
+      } else {
+        videoEl.pause();
+        playerEl.classList.add("is-paused");
+      }
+    });
+
+    segChips.forEach((el) => {
+      el.addEventListener("click", () => {
+        const idx = Number(el.dataset.step);
+        videoEl.currentTime = idx + 0.05;
+        renderStep(idx);
+        if (videoEl.paused) {
+          videoEl.play().catch(() => {});
+          playerEl.classList.remove("is-paused");
+        }
+      });
+    });
+
+    // 2. Method Tabs
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.tab;
+        tabBtns.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle("is-active", active);
+          b.setAttribute("aria-selected", String(active));
+        });
+        document.getElementById("panel-mwpa").classList.toggle("is-active", target === "mwpa");
+        document.getElementById("panel-data").classList.toggle("is-active", target === "data");
+      });
+    });
+
+    // 3. Expandable Table 2
+    const tableEl = document.getElementById("results-table");
+    const toggleTableBtn = document.getElementById("toggle-table");
+    toggleTableBtn.addEventListener("click", () => {
+      const expanded = tableEl.classList.toggle("show-all");
+      toggleTableBtn.textContent = expanded ? "Show compact table ↑" : "Show all 15 models ↓";
+    });
+
+    // 4. Copy BibTeX
+    const copyBtn = document.getElementById("copy-bibtex");
+    const bibtexEl = document.getElementById("bibtex-code");
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(bibtexEl.textContent.trim());
+        copyBtn.textContent = "Copied ✓";
+        setTimeout(() => { copyBtn.textContent = "Copy"; }, 1800);
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(bibtexEl);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand("copy");
+        copyBtn.textContent = "Copied ✓";
+        setTimeout(() => { copyBtn.textContent = "Copy"; }, 1800);
+      }
+    });
+  </script>
+</body>
+</html>

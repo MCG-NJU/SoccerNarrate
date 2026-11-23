@@ -27,3 +27,6 @@ streaming-vlm/checkpoints/
 streaming-vlm/streaming_vlm/inference/infer_test/
 streaming-vlm/streaming_vlm/inference/log/
 eval/llm_as_a_judge/results/
+
+# Local symlink for GitHub Pages preview (copied in CI)
+docs/demo
