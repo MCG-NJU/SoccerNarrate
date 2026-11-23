@@ -1,8 +1,6 @@
 <div align="center">
 
-# SoccerNarrate
-
-<h3>Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment</h3>
+# SoccerNarrate: Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment
 
 <p>
   <b>NeurIPS 2026</b>
