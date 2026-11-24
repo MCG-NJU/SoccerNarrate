@@ -28,6 +28,7 @@
 </p>
 
 <p>
+  <a href="https://mcg-nju.github.io/SoccerNarrate/"><img src="https://img.shields.io/badge/Project-Page-brightgreen.svg" alt="Project Page"></a>
   <img src="https://img.shields.io/badge/Paper-Coming%20Soon-b31b1b.svg" alt="Paper">
   <a href="https://huggingface.co/collections/MCG-NJU/soccernarrate-6b03e5ec4b39ad06088131d2"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Collection-SoccerNarrate-orange.svg" alt="Collection"></a>
   <a href="https://huggingface.co/JiaZihan1/SoccerNarrate-7B"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model-SoccerNarrate--7B-blue.svg" alt="Model"></a>
@@ -57,6 +58,37 @@ https://github.com/user-attachments/assets/b4cbac76-66b7-4b30-acc3-a5316eb0d0af
 - **Shot Off Target**: [`demo/shot_off_target.mp4`](demo/shot_off_target.mp4)
 
 </details>
+
+---
+
+## 📢 News & Release Roadmap
+
+- **[2026-11]** Released the **SoccerNarrate** codebase (`data_pipeline/`, `streaming-vlm/`, `eval/`, `livecc/`), interactive [project page](https://mcg-nju.github.io/SoccerNarrate/), and [**SoccerNarrate-Data**](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) (SFT + MWPA/DPO annotations) on Hugging Face.
+
+**Released**
+
+- [x] [Project page & interactive demo viewer](https://mcg-nju.github.io/SoccerNarrate/)
+- [x] Full-match ASR curation, SFT & MWPA/DPO data construction pipeline ([`data_pipeline/`](data_pipeline/))
+- [x] Streaming SFT & Macro-Window Preference Alignment (MWPA / DPO) training and inference codebase ([`streaming-vlm/`](streaming-vlm/))
+- [x] Event-centric full-match evaluation suite (**SoccerNarrate-Eval** & SCORES) ([`eval/`](eval/))
+- [x] [`SoccerNarrate-Data`](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) annotations (SFT + MWPA preference pairs) on Hugging Face
+
+**Upcoming**
+
+- [ ] Paper on arXiv
+- [ ] [`SoccerNarrate-7B`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) & [`SoccerNarrate-7B-SFT`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) model weights on Hugging Face
+
+---
+
+## 📦 Model and Dataset Zoo
+
+| Artifact | Base Model / Composition | Scale | Status |
+| :--- | :--- | :--- | :---: |
+| [**SoccerNarrate-7B**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) | `Qwen2.5-VL-7B-Instruct` (Stage 1+2 SFT + Stage 3 MWPA) | 7B | Coming Soon |
+| [**SoccerNarrate-7B-SFT**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) | `Qwen2.5-VL-7B-Instruct` (Stage 1+2 Streaming SFT) | 7B | Coming Soon |
+| [**SoccerNarrate-Data**](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) | 58.4K streaming SFT segments (52.3K train + 6.1K eval) + 13.7K 15s MWPA preference pairs | 436 full matches (502h) | Available |
+
+> All released assets are indexed in the 🤗 [**MCG-NJU / SoccerNarrate Collection**](https://huggingface.co/collections/MCG-NJU/soccernarrate-6b03e5ec4b39ad06088131d2).
 
 ---
 
