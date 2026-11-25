@@ -63,7 +63,7 @@ https://github.com/user-attachments/assets/b4cbac76-66b7-4b30-acc3-a5316eb0d0af
 
 ## 📢 News & Release Roadmap
 
-- **[2026-11]** Released our paper on [arXiv (2611.32153)](https://arxiv.org/abs/2611.32153), the **SoccerNarrate** codebase (`data_pipeline/`, `streaming-vlm/`, `eval/`, `livecc/`), interactive [project page](https://mcg-nju.github.io/SoccerNarrate/), and [**SoccerNarrate-Data**](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) (SFT + MWPA/DPO annotations) on Hugging Face.
+- **[2026-11]** Released our paper on [arXiv (2611.32153)](https://arxiv.org/abs/2611.32153), the **SoccerNarrate** codebase (`data_pipeline/`, `streaming-vlm/`, `eval/`, `livecc/`), interactive [project page](https://mcg-nju.github.io/SoccerNarrate/), [**SoccerNarrate-7B**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) & [**SoccerNarrate-7B-SFT**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) checkpoints, and [**SoccerNarrate-Data**](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) on Hugging Face.
 
 **Released**
 
@@ -72,12 +72,8 @@ https://github.com/user-attachments/assets/b4cbac76-66b7-4b30-acc3-a5316eb0d0af
 - [x] Full-match ASR curation, SFT & MWPA/DPO data construction pipeline ([`data_pipeline/`](data_pipeline/))
 - [x] Streaming SFT & Macro-Window Preference Alignment (MWPA / DPO) training and inference codebase ([`streaming-vlm/`](streaming-vlm/))
 - [x] Event-centric full-match evaluation suite (**SoccerNarrate-Eval** & SCORES) ([`eval/`](eval/))
-- [x] [`SoccerNarrate-7B`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) checkpoint on Hugging Face
+- [x] [`SoccerNarrate-7B`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) & [`SoccerNarrate-7B-SFT`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) checkpoints on Hugging Face
 - [x] [`SoccerNarrate-Data`](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) annotations (SFT + MWPA preference pairs) on Hugging Face
-
-**Upcoming**
-
-- [ ] [`SoccerNarrate-7B-SFT`](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) checkpoint on Hugging Face
 
 ---
 
@@ -86,7 +82,7 @@ https://github.com/user-attachments/assets/b4cbac76-66b7-4b30-acc3-a5316eb0d0af
 | Artifact | Base Model / Composition | Scale | Status |
 | :--- | :--- | :--- | :---: |
 | [**SoccerNarrate-7B**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B) | `Qwen2.5-VL-7B-Instruct` (SFT + MWPA) | 7B | Available |
-| [**SoccerNarrate-7B-SFT**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) | `Qwen2.5-VL-7B-Instruct` (SFT) | 7B | Coming Soon |
+| [**SoccerNarrate-7B-SFT**](https://huggingface.co/JiaZihan1/SoccerNarrate-7B-SFT) | `Qwen2.5-VL-7B-Instruct` (SFT) | 7B | Available |
 | [**SoccerNarrate-Data**](https://huggingface.co/datasets/JiaZihan1/SoccerNarrate-Data) | 58.4K streaming SFT segments (52.3K train + 6.1K eval) + 13.7K 15s MWPA preference pairs | 436 full matches (502h) | Available |
 
 > All released assets are indexed in the 🤗 [**MCG-NJU / SoccerNarrate Collection**](https://huggingface.co/collections/MCG-NJU/soccernarrate-6b03e5ec4b39ad06088131d2).
