@@ -1,6 +1,6 @@
 <div align="center">
 
-# [SoccerNarrate: Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment](https://arxiv.org/abs/2611.32153)
+# SoccerNarrate: Event-Grounded Streaming Soccer Commentary with Macro-Window Preference Alignment
 
 <p>
   <b>NeurIPS 2026 Poster</b>
