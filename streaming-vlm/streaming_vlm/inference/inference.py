@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Single-video real-time streaming commentary + WebVTT subtitle generation.
+Full-match real-time streaming commentary + WebVTT subtitle generation.
 
 Example:
     python streaming-vlm/streaming_vlm/inference/inference.py \
-        --model_path /path/to/soccernarrate/checkpoint \
-        --video_path demo/Goal.mp4 \
-        --output_dir output/Goal.vtt
+        --model_path JiaZihan1/SoccerNarrate-7B \
+        --video_path /path/to/full_match_video.mkv \
+        --output_dir output/full_match.vtt
 """
 import sys
 from pathlib import Path

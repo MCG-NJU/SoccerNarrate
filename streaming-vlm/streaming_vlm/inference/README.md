@@ -10,16 +10,16 @@ Activate the inference environment created by `streaming-vlm/scripts/env_infer.s
 conda activate streamingvlm-infer
 ```
 
-## 2. Single-Video Inference (`inference.py`)
+## 2. Full-Match Streaming Inference (`inference.py`)
 
-Run real-time streaming commentary on any local soccer video clip or full match half (`.mp4` / `.mkv`) and save timestamped subtitles as a `.vtt` file:
+Run real-time streaming commentary on an untrimmed full-match soccer broadcast video (e.g., SoccerNet `1_720p.mkv` / `2_720p.mkv` or any raw full-match `.mp4`/`.mkv`) and save timestamped subtitles as a `.vtt` file:
 
 ```bash
 python streaming-vlm/streaming_vlm/inference/inference.py \
-  --model_path /path/to/soccernarrate/checkpoint \
+  --model_path JiaZihan1/SoccerNarrate-7B \
   --model_base Qwen2_5 \
-  --video_path demo/Goal.mp4 \
-  --output_dir output/Goal.vtt
+  --video_path /path/to/full_match_video.mkv \
+  --output_dir output/full_match.vtt
 ```
 
 ## 3. Single-Process Evaluation Inference (`baseline_infer.py`)
